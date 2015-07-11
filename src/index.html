@@ -1,3 +1,26 @@
 <html>
-<h1>Armor Attack v0.01.</h1>
+<head>
+<script src='gfx.js'></script>
+</head>
+<body bgcolor=yellow>
+
+<h1>Armor Attack v0.02.</h1>
+<canvas id='c' width=300 height=300 style="background: black; border:1px solid #000000;"></canvas>
+<script>
+	var canvas = document.getElementById('c');
+	var ctx2d = canvas.getContext('2d');
+	var drv = AAGfxDriver(ctx2d, canvas.width);
+	var poly = Poly();
+	poly.add(0, 0);
+	poly.add(1, 1);
+	poly.add(0, -0.5);
+	poly.add(1, -1);
+	poly.add(-1, -1);
+	poly.add(-1, 1);
+	poly.add(1, 1);
+	poly.add(1, -1);
+	drv.drawPoly(poly);
+</script>
+
+</body>
 </html>
