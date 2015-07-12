@@ -17,7 +17,7 @@
 		<button ng-click="toggle()">Changelog</button>
 		<div ng-show="changelog">
 			<ul>
-				<li ng-repeat="change in changelog">
+				<li ng-repeat="change in changelog | orderBy:'-version'">
 					{{ change.version }}: {{ change.log }}
 				</li>
 			</ul>
