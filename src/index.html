@@ -1,26 +1,41 @@
+<!DOCTYPE html>
 <html>
 <head>
-<script src='gfx.js'></script>
+	<script data-require="angular.js@*" data-semver="1.3.0-beta.5" src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
+	<link rel="stylesheet" href="style.css" />
+	<script src="gfx.js"></script>
+	<script src="script.js"></script>
 </head>
-<body bgcolor=yellow>
+<body>
+	<h1>Armor Attack JS</h1>
+	<canvas class="gamediv" id="c"></canvas>
 
-<h1>Armor Attack v0.02.</h1>
-<canvas id='c' width=300 height=300 style="background: black; border:1px solid #000000;"></canvas>
-<script>
-	var canvas = document.getElementById('c');
-	var ctx2d = canvas.getContext('2d');
-	var drv = AAGfxDriver(ctx2d, canvas.width);
-	var poly = Poly();
-	poly.add(0, 0);
-	poly.add(1, 1);
-	poly.add(0, -0.5);
-	poly.add(1, -1);
-	poly.add(-1, -1);
-	poly.add(-1, 1);
-	poly.add(1, 1);
-	poly.add(1, -1);
-	drv.drawPoly(poly);
-</script>
+	<div ng-app="aaApp" ng-controller="aaController">
+		<button ng-click="toggle()">Changelog</button>
+		<div ng-show="changelog">
+		<ul>
+			<li ng-repeat="change in changelog">
+				{{ change.version }}: {{ change.log }}
+			</li>
+		</ul>
+		</div>
+	</div>
+
+	<script>
+		var canvas = document.getElementById('c');
+		var ctx2d = canvas.getContext('2d');
+		var drv = AAGfxDriver(ctx2d, canvas.width);
+		var poly = Poly();
+		poly.add(0, 0);
+		poly.add(1, 1);
+		poly.add(0, -0.5);
+		poly.add(1, -1);
+		poly.add(-1, -1);
+		poly.add(-1, 1);
+		poly.add(1, 1);
+		poly.add(1, -1);
+		drv.drawPoly(poly);
+	</script>
 
 </body>
 </html>
