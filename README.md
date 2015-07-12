@@ -6,6 +6,7 @@ Scope
 * Programming language: JavaScript
 * Utility language: Python
 * Architecture: SPA (single page application) with ad-hoc Finite State Machine pattern
+* Desktop only. Possible extension: Mobile via bootstrap
 
 Rules
 -----
