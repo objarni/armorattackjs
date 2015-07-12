@@ -37,6 +37,9 @@ AAGfxDriver = function(ctx2d, size) {
 			for (var i = 0; i < poly.vertices.length; i += 2)
 				ctx2d.lineTo(poly.vertices[i], poly.vertices[i+1]);
 			ctx2d.stroke();
+		},
+		clear: function() {
+			ctx2d.clearRect(-1, -1, size * 2, size * 2);
 		}
 	}
 	return api;

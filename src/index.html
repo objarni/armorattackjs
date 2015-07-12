@@ -2,39 +2,65 @@
 <html>
 <head>
 	<script data-require="angular.js@*" data-semver="1.3.0-beta.5" src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
+	<script data-require="jquery@*" data-semver="2.1.3" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 	<link rel="stylesheet" href="style.css" />
 	<script src="gfx.js"></script>
-	<script src="script.js"></script>
+	<script src="angular_script.js"></script>
+	<script src="rnd.js"></script>
+	<script src="fps.js"></script>
 </head>
 <body>
 	<h1>Armor Attack JS</h1>
-	<canvas class="gamediv" id="c"></canvas>
+	<canvas class="gamediv" id="c" width=300 height=300></canvas>
 
 	<div ng-app="aaApp" ng-controller="aaController">
 		<button ng-click="toggle()">Changelog</button>
 		<div ng-show="changelog">
-		<ul>
-			<li ng-repeat="change in changelog">
-				{{ change.version }}: {{ change.log }}
-			</li>
-		</ul>
+			<ul>
+				<li ng-repeat="change in changelog">
+					{{ change.version }}: {{ change.log }}
+				</li>
+			</ul>
 		</div>
 	</div>
 
+	Linecount:
+	<input type=number name="linecount" id="linecount" value=100>
+
 	<script>
-		var canvas = document.getElementById('c');
-		var ctx2d = canvas.getContext('2d');
-		var drv = AAGfxDriver(ctx2d, canvas.width);
-		var poly = Poly();
-		poly.add(0, 0);
-		poly.add(1, 1);
-		poly.add(0, -0.5);
-		poly.add(1, -1);
-		poly.add(-1, -1);
-		poly.add(-1, 1);
-		poly.add(1, 1);
-		poly.add(1, -1);
-		drv.drawPoly(poly);
+		$(function() {
+
+			// FPS counter
+			var stats = new Stats();
+			stats.setMode( 0 ); // 0: fps, 1: ms, 2: mb
+			stats.domElement.style.position = 'absolute';
+			stats.domElement.style.left = '0px';
+			stats.domElement.style.top = '0px';
+			document.body.appendChild( stats.domElement );
+
+			// Render loop
+			var canvas = document.getElementById('c');
+			var ctx2d = canvas.getContext('2d');
+			var drv = AAGfxDriver(ctx2d, canvas.width);
+
+			var linecount = $("#linecount").val();
+
+			var poly = Poly();
+			for(var i = 0; i < linecount; i++) {
+				poly.add(randrange(-1, 1), randrange(-1, 1));
+			}
+
+			draw = function() {
+
+				stats.begin();
+				drv.clear();
+				drv.drawPoly(poly);
+				stats.end();
+
+				requestAnimationFrame(draw);
+			};
+			draw();
+		});
 	</script>
 
 </body>

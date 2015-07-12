@@ -9,7 +9,8 @@
 				var changelog = [
 				{ version: 0.01, log: "Empty HTML page" },
 				{ version: 0.02, log: "Canvas added, yellow background" },
-				{ version: 0.03, log: "Changelog added" }
+				{ version: 0.03, log: "Changelog added" },
+				{ version: 0.04, log: "FPS counter added" }
 				];
 				$scope.changelog = changelog;
 			}
