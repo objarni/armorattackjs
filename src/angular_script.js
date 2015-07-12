@@ -11,6 +11,7 @@
 				{ version: 0.02, log: "Canvas added, yellow background" },
 				{ version: 0.03, log: "Changelog added" },
 				{ version: 0.04, log: "FPS counter added" }
+				{ version: 0.05, log: "Changelog sorted by version" },
 				];
 				$scope.changelog = changelog;
 			}
