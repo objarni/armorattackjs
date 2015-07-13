@@ -1,10 +1,14 @@
 // API 0.1
 // Användare anger 1 ... N punkter som utgör en polygon i koordinatsystemet
-// (-1.0, 1.0) x (-1.0, 1.0). Punkten (-1, -1) ligger nere till vänster
-// i browserns canvasdiv. Polygonen är öppen. 
-// Exempel, rita enpunktsskott
+// (-1.0, -1.0) x (1.0, 1.0). Punkten (-1, -1) ligger nere till vänster
+// i browserns canvasdiv. Punkten (0, 0) ligger i centrum. Polygoner är öppna. 
+
+// Exempel, rita en punkt (skott från tank):
+// var poly = Poly();
+// poly.add(-0.1, -0.2);
 // drv.poly(poly); // x1, y1
-// Exempel 2, rita rektangel (jeep).
+
+// Exempel 2, rita rektangel (jeep):
 // var poly = Poly();
 // poly.add(-0.1, -0.2);
 // poly.add(-0.1, 0.2);
