@@ -39,7 +39,7 @@ AAGfxDriver = function(ctx2d, size) {
 			ctx2d.stroke();
 		},
 		clear: function() {
-			ctx2d.clearRect(-1, -1, size * 2, size * 2);
+			ctx2d.clearRect(-1, -1, 2, 2);
 		}
 	}
 	return api;
