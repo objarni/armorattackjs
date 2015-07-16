@@ -9,11 +9,35 @@
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
   <script src="http://code.jquery.com/qunit/qunit-1.18.0.js"></script>
+  <script src="aagame.js"></script>
   <script>
-    QUnit.test( "a basic test example", function( assert ) {
-      var value = "hello";
-      assert.equal( value, "hello", "We expect value to be hello" );
+
+    /*
+    AAGAme - the main game object of Armour Attack JS.
+    States:
+     TITLE, INGAME, DEAD, GAMEOVER, GAMEFINISHED
+    Events:
+     ButtonDown
+     PlayerHit
+     NoMoreWaves
+     Tick
+    */
+    QUnit.module( "AAGame - TITLE state" );
+
+    QUnit.test( "is start state", function( assert ) {
+      var aagame = AAGame();
+      var state = aagame.getState();
+      assert.equal( state, "TITLE", "Should start in TITLE state" );
     });
+    
+    QUnit.test( "transitions to ingame on control down", function( assert ) {
+      var aagame = AAGame();
+      var e = { sig: 'ControlDown', par: 'left' };
+      aagame.handle(e);
+      var state = aagame.getState();
+      assert.equal( state, "INGAME", "Should go to INGAME on key down" );
+    });
+    
   </script>
   <a href="index.html">Back to Armor Attack</a>
 </body>
