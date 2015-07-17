@@ -4,16 +4,34 @@
 
 var AAGame = function () {
 	var state = "TITLE";
-	var handleEvent = function(e) {
-		console.log('handleEvent' + e);
-		console.log('state ' + state);
-		state = "INGAME";
-		console.log('state ' + state);
+	var lives = 0;
+
+	var handleEvent = function(sig, par) {
+		switch(sig) {
+			case 'ControlDown':
+				state = 'INGAME';
+				lives = 3;
+				break;
+			case 'NoMoreWaves':
+				state = 'GAMEFINISHED';
+				break;
+			case 'PlayerHit':
+				lives -= 1;
+				if ( lives == 0 )
+					state = 'GAMEOVER';
+				else
+					state = 'DEAD';
+				break;
+		}
 	};
+
 	var getState = function() { return state; };
+	var getLives = function() { return lives; };
+
 	var api = {
+		handle: handleEvent,
 		getState: getState,
-		handle: handleEvent
+		getLives: getLives
 	};
 
 	return api;
