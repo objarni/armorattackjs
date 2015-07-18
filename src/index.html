@@ -32,8 +32,11 @@
 	<script>
 		$(function() {
 
+			// Enable/disable debug mode
+			debug = true;
+
 			// AAGame
-			aagame = AAGame();
+			app = AAGame();
 
 			// FPS counter
 			var stats = new Stats();
@@ -43,7 +46,31 @@
 			stats.domElement.style.top = '0px';
 			document.body.appendChild( stats.domElement );
 
-			// Render loop
+			// Keyboard event handling
+			var keyTable = {
+				'Left': 'left',
+				'Right': 'right',
+				'Up': 'gas'
+			}
+			var handleKey = function(sig, e) {
+				if ( e.keyIdentifier in keyTable) {
+					app.handle( sig, keyTable[e.keyIdentifier] );
+				}
+				else if ( e.keyCode == 17 ) {
+					// 17 = Control key
+					app.handle( sig, 'fire' );
+				}
+			};
+			var doKeyDown = function(e) {
+				handleKey( 'ControlDown', e );
+			};
+			var doKeyUp = function(e) {
+				handleKey( 'ControlUp', e );
+			};
+			window.addEventListener( "keydown", doKeyDown, false );
+			window.addEventListener( "keyup", doKeyUp, false );
+
+			// Animation/rendering
 			var canvas = document.getElementById('c');
 			var ctx2d = canvas.getContext('2d');
 			var gfx = AAGfxDriver(ctx2d, canvas.width);
@@ -53,10 +80,11 @@
 			draw = function() {
 
 				stats.begin();
-				aagame.handle('Draw', gfx);
+				app.handle('Draw', gfx);
 				stats.end();
 
 				requestAnimationFrame(draw);
+				//setTimeout('requestAnimationFrame(draw)', 1000);
 			};
 			draw();
 		});

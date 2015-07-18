@@ -7,6 +7,9 @@ var AAGame = function () {
 	var lives = 0;
 
 	var handleEvent = function(sig, par) {
+		if ( debug )
+			if ( sig !== 'Draw' )
+				console.log(sig, par);
 		switch(sig) {
 			case 'ControlDown':
 				state = 'INGAME';
