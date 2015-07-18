@@ -8,6 +8,7 @@
 	<script src="angular_script.js"></script>
 	<script src="rnd.js"></script>
 	<script src="fps.js"></script>
+	<script src="aagame.js"></script>
 </head>
 <body>
 	<h1>Armor Attack JS</h1>
@@ -31,6 +32,9 @@
 	<script>
 		$(function() {
 
+			// AAGame
+			aagame = AAGame();
+
 			// FPS counter
 			var stats = new Stats();
 			stats.setMode( 0 ); // 0: fps, 1: ms, 2: mb
@@ -42,20 +46,14 @@
 			// Render loop
 			var canvas = document.getElementById('c');
 			var ctx2d = canvas.getContext('2d');
-			var drv = AAGfxDriver(ctx2d, canvas.width);
+			var gfx = AAGfxDriver(ctx2d, canvas.width);
 
 			var linecount = $("#linecount").val();
-
-			var poly = Poly();
-			for(var i = 0; i < linecount; i++) {
-				poly.add(randrange(-1, 1), randrange(-1, 1));
-			}
 
 			draw = function() {
 
 				stats.begin();
-				drv.clear();
-				drv.drawPoly(poly);
+				aagame.handle('Draw', gfx);
 				stats.end();
 
 				requestAnimationFrame(draw);

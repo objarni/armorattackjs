@@ -22,6 +22,15 @@ var AAGame = function () {
 				else
 					state = 'DEAD';
 				break;
+			case 'Draw':
+				var gfx = par;
+				var poly = Poly();
+				for(var i = 0; i < 10; i++) {
+					poly.add(randrange(-1, 1), randrange(-1, 1));
+				}
+				gfx.clear();
+				gfx.drawPoly(poly);
+				break;
 		}
 	};
 
