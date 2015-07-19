@@ -16,27 +16,39 @@
 	<div align="center">
 		<span>
 			<canvas class="gamediv" id="c" width=315 height=315></canvas>
+			<div class="bottomspace">JavaScript version</div>
 		</span>
 		<span>
 			<iframe width="420" height="315" src="http://www.youtube.com/embed/72T07X0ZxQs">
-		</iframe>
-	</span>
-</div>
-
-<div ng-app="aaApp" ng-controller="aaController">
-	<button ng-click="toggle()">Changelog</button>
-	<div ng-show="changelog">
-		<ul>
-			<li ng-repeat="change in changelog | orderBy:'-version'">
-				{{ change.version }}: {{ change.log }}
-			</li>
-		</ul>
+			</iframe>
+			<div class="bottomspace">Vectrex version</div>
+		</span>
 	</div>
-</div>
 
+	<div align="center" ng-app="aaApp" ng-controller="aaController">
+		<div>
+			<span ng-repeat="link in links">
+				<a target="_blank" href="{{ link.url }}">{{ link.title }}</a>
+			</span>
+		</div>
+		<button ng-click="toggle()">Changelog</button>
+		<div width="20%">
+			<div ng-show="changelog">
+				<table>
+					<tr ng-repeat="change in changelog | orderBy:'-version'">
+						<td>{{ change.version }}</td>
+						<td>{{ change.log }}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+<!--
 Linecount:
 <input type=number name="linecount" id="linecount" value=100>
-<a href="tests.html">Run Unit Tests</a>
+-->
 
 <script>
 	$(function() {

@@ -1,3 +1,7 @@
+body {
+	background: lightblue;
+}
+
 h1 {
 	text-align: center;
 	color: blue;
@@ -13,11 +17,11 @@ h1 {
 	border: 2px solid blue;
 }
 
+.bottomspace {
+	margin-bottom: 30px;
+}
+
 .center {
 	display: block;
 	margin: auto;
-}
-
-body {
-	background: yellow;
 }
