@@ -13,7 +13,8 @@
 				{ version: 0.04, log: "FPS counter added" },
 				{ version: 0.05, log: "Changelog sorted by version" },
 				{ version: 0.06, log: "Removed random lines, added jeep polys"},
-				{ version: 0.07, log: "Added YouTube video to the side"}
+				{ version: 0.07, log: "Added YouTube video to the side"},
+				{ version: 0.08, log: "Improved layout, changed colors, links"}
 				];
 				$scope.changelog = changelog;
 			}
