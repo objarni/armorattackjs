@@ -42,6 +42,16 @@ AAGfxDriver = function(ctx2d, size) {
 				ctx2d.lineTo(poly.vertices[i], poly.vertices[i+1]);
 			ctx2d.stroke();
 		},
+		drawPosRotPolys: function(polys, x, y, deg) {
+			ctx2d.save();
+			ctx2d.translate(x, y);
+			var rad = deg * 0.0174532925;
+			ctx2d.rotate(rad);
+			polys.forEach(function(poly) {
+				api.drawPoly(poly);
+			});
+			ctx2d.restore();
+		},
 		clear: function() {
 			ctx2d.clearRect(-1, -1, 2, 2);
 		}

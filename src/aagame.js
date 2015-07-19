@@ -28,9 +28,7 @@ var AAGame = function () {
 				break;
 			case 'Draw':
 				var gfx = par;
-				jeep.forEach(function(poly) {
-					gfx.drawPoly(poly);
-				});
+				gfx.drawPosRotPolys(jeep, -0.9, -0.9, -45);
 				break;
 		}
 	};
