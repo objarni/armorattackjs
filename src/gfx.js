@@ -32,7 +32,7 @@ AAGfxDriver = function(ctx2d, size) {
 	ctx2d.resetTransform();
 	ctx2d.translate(size/2, size/2);
 	ctx2d.scale(size/2, -size/2);
-	ctx2d.lineWidth = 2.5/size;
+	ctx2d.lineWidth = 3.5/size;
 	ctx2d.strokeStyle = '#aaffaa';
 	var api = {
 		drawPoly: function(poly) {

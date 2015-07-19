@@ -9,12 +9,11 @@ h1 {
 
 .gamediv {
 	margin: auto;
-	border: 1px solid #000000;
-	background: black;
+	background: darkgreen;
 	width: 315px;
 	height: 315px;
 	display: inline;
-	border: 2px solid blue;
+	border: 2px solid red;
 }
 
 .bottomspace {
