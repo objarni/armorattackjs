@@ -2,14 +2,22 @@ h1 {
 	text-align: center;
 	color: blue;
 }
+
 .gamediv {
 	margin: auto;
 	border: 1px solid #000000;
 	background: black;
-	width: 300px;
-	height: 300px;
-	display: block;
+	width: 315px;
+	height: 315px;
+	display: inline;
+	border: 2px solid blue;
 }
+
+.center {
+	display: block;
+	margin: auto;
+}
+
 body {
 	background: yellow;
 }
