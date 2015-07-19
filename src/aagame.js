@@ -2,10 +2,13 @@
  * @author objarni
  */
 
+// Enable/disable debug mode
+debug = true;
+
 var AAGame = function () {
 	var state = "TITLE";
 	var lives = 0;
-	var jeep = jeepPolys();
+	var jeep = null;
 
 	var handleEvent = function(sig, par) {
 		if ( debug )
@@ -28,6 +31,9 @@ var AAGame = function () {
 				break;
 			case 'Draw':
 				var gfx = par;
+				if ( !jeep )
+					jeep = jeepPolys();
+
 				gfx.drawPosRotPolys(jeep, -0.9, -0.9, -45);
 				break;
 		}
