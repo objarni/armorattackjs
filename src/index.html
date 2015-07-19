@@ -95,7 +95,15 @@ Linecount:
 
 			var linecount = $("#linecount").val();
 
+			var prevTime = new Date().getTime();;
+
 			draw = function() {
+
+				var now = new Date().getTime();
+				var dt = (now - prevTime) / 1000.0; // Seconds!
+				prevTime = now;
+
+				app.handle('Tick', dt);
 
 				stats.begin();
 				gfx.clear();
@@ -103,7 +111,7 @@ Linecount:
 				stats.end();
 
 				requestAnimationFrame(draw);
-				//setTimeout('requestAnimationFrame(draw)', 1000);
+				//setTimeout('requestAnimationFrame(draw)', 100);
 			};
 			draw();
 		});
