@@ -38,7 +38,7 @@
     
     QUnit.test( "transitions to ingame on control down", function( assert ) {
       var aagame = AAGame();
-      aagame.handle('ControlDown', 'left');
+      aagame.handleEvent('ControlDown', 'left');
       var state = aagame.getState();
       assert.equal( state, "INGAME", "Should go to INGAME on key down" );
     });
@@ -47,7 +47,7 @@
 
     QUnit.test( "game finished event detected", function( assert ) {
       var aagame = AAGame();
-      aagame.handle('NoMoreWaves', null);
+      aagame.handleEvent('NoMoreWaves', null);
       var state = aagame.getState();
       assert.equal( state, "GAMEFINISHED", "Should go to GAMEFINISHED when no more waves are left" );
     });
@@ -55,29 +55,29 @@
     QUnit.test( "player starts with 3 jeeps", function( assert ) {
       var aagame = AAGame();
       assert.equal( aagame.getLives(), 0 );
-      aagame.handle( 'ControlDown', 'right' );
+      aagame.handleEvent( 'ControlDown', 'right' );
       assert.equal( aagame.getLives(), 3 );
     });
     
     QUnit.test( "lives decrease when player hit", function( assert ) {
       var aagame = AAGame();
-      aagame.handle( 'ControlDown', 'fire' );
-      aagame.handle( 'PlayerHit', null );
+      aagame.handleEvent( 'ControlDown', 'fire' );
+      aagame.handleEvent( 'PlayerHit', null );
       assert.equal( aagame.getLives(), 2 );
     });
     
     QUnit.test( "goes to DEAD state when hit and more than 0 lives left", function( assert ) {
       var aagame = AAGame();
-      aagame.handle( 'PlayerHit', null );
+      aagame.handleEvent( 'PlayerHit', null );
       assert.equal( aagame.getState(), 'DEAD' );
     });
     
     QUnit.test( "goes to GAMEOVER state when hit and 0 lives left", function( assert ) {
       var aagame = AAGame();
-      aagame.handle( 'ControlDown', 'fire' );
-      aagame.handle( 'PlayerHit', null );
-      aagame.handle( 'PlayerHit', null );
-      aagame.handle( 'PlayerHit', null );
+      aagame.handleEvent( 'ControlDown', 'fire' );
+      aagame.handleEvent( 'PlayerHit', null );
+      aagame.handleEvent( 'PlayerHit', null );
+      aagame.handleEvent( 'PlayerHit', null );
       assert.equal( aagame.getState(), 'GAMEOVER' );
     });
 
