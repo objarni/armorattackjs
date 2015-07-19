@@ -10,6 +10,7 @@
   <div id="qunit-fixture"></div>
   <script src="http://code.jquery.com/qunit/qunit-1.18.0.js"></script>
   <script src="aagame.js"></script>
+  <script src="fsmapp.js"></script>
   <script>
 
     /*
@@ -78,6 +79,47 @@
       aagame.handle( 'PlayerHit', null );
       aagame.handle( 'PlayerHit', null );
       assert.equal( aagame.getState(), 'GAMEOVER' );
+    });
+
+
+    /*
+      FSMApp - qp inspired FSM running object.
+      Features:
+        add/remove machines in runtime
+        0 or more machines
+        handleEvent propages to all machines
+        public API to publish events, add/remove machines
+    */
+
+    QUnit.module( "FSAMApp" );
+
+    QUnit.test( "event is propagated to every machine", function( assert ) {
+      var calls = 0;
+      var m1 = { handleEvent: function(sig, par) { calls++; }};
+      var m2 = { handleEvent: function(sig, par) { calls++; }};
+      var app = FSMApp();
+      app.addMachine(m1);
+      app.addMachine(m2);
+      app.handleEvent('testsignal', null);
+      assert.equal( 2, calls, 'Should propagate event to every machine');
+    });
+    
+    QUnit.test( "removed machine does not get events anymore", function( assert ) {
+      var calls = 0;
+      var m = { handleEvent: function(sig, par) { calls++; }};
+      var app = FSMApp();
+      app.addMachine(m);
+      app.handleEvent('testsignal', null);
+      app.removeMachine(m);
+      app.handleEvent('testsignal', null);
+      assert.equal( 1, calls, 'Should not propagate events to removed machine');
+    });
+        
+    QUnit.test( "removing non-added machine throws", function( assert ) {
+      var calls = 0;
+      var m = { handleEvent: function(sig, par) { calls++; }};
+      var app = FSMApp();
+      assert.throws(function() { app.removeMachine(m) }, 'Should throw if removing non-added machine');
     });
     
     setTimeout(function() { location.reload() }, 2000);

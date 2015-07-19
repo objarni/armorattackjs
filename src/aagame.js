@@ -70,7 +70,7 @@ var AAGame = function () {
 		var getLives = function() { return lives; };
 
 		var api = {
-			handle: handleEvent,
+			handleEvent: handleEvent,
 			getState: getState,
 			getLives: getLives
 		};
