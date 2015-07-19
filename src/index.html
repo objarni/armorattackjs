@@ -9,6 +9,7 @@
 	<script src="rnd.js"></script>
 	<script src="fps.js"></script>
 	<script src="aagame.js"></script>
+	<script src="jeep.js"></script>
 </head>
 <body>
 	<h1>Armor Attack JS</h1>
@@ -80,6 +81,7 @@
 			draw = function() {
 
 				stats.begin();
+				gfx.clear();
 				app.handle('Draw', gfx);
 				stats.end();
 

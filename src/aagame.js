@@ -5,6 +5,7 @@
 var AAGame = function () {
 	var state = "TITLE";
 	var lives = 0;
+	var jeep = jeepPolys();
 
 	var handleEvent = function(sig, par) {
 		if ( debug )
@@ -27,12 +28,9 @@ var AAGame = function () {
 				break;
 			case 'Draw':
 				var gfx = par;
-				var poly = Poly();
-				for(var i = 0; i < 10; i++) {
-					poly.add(randrange(-1, 1), randrange(-1, 1));
-				}
-				gfx.clear();
-				gfx.drawPoly(poly);
+				jeep.forEach(function(poly) {
+					gfx.drawPoly(poly);
+				});
 				break;
 		}
 	};
