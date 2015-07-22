@@ -8,8 +8,6 @@ debug = true;
 var AAGame = function (app) {
 	var state = "TITLE";
 	var lives = 0;
-	var jeep = null;
-	var deg = 0;
 	var timeAcc = 0;
 
 	var handleEvent = function(sig, par) {
@@ -27,7 +25,7 @@ var AAGame = function (app) {
 				state = 'INGAME';
 				lives = 2;
 				if ( app )
-					app.addMachine({});
+					app.addMachine(JeepFSM());
 				break;
 			}
 			break;
@@ -50,11 +48,6 @@ var AAGame = function (app) {
 				break;
 
 				case 'Draw':
-				var gfx = par;
-				if ( !jeep )
-					jeep = jeepPolys();
-
-				gfx.drawPosRotPolys(jeep, -0.9, -0.9, deg);
 				break;
 			}
 			break;
@@ -84,7 +77,8 @@ var AAGame = function (app) {
 	var api = {
 		handleEvent: handleEvent,
 		getState: getState,
-		getLives: getLives
+		getLives: getLives,
+		name: "AAGame"
 	};
 
 	return api;

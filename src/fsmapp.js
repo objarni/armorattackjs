@@ -19,6 +19,9 @@ FSMApp = function() {
 		},
 		countMachines: function() {
 			return machines.length;
+		},
+		listMachines: function() {
+			return machines;
 		}
 	};
 };

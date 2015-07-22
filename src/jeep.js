@@ -19,6 +19,8 @@ JeepFSM = function() {
 	var rotDir = 0;
 	var right = 0;
 	var left = 0;
+	var jeep = null;
+	var deg = 0;
 
 	var updateLeftRight = function(sig, par) {
 		if ( sig !== 'ControlDown' && sig !== 'ControlUp')
@@ -43,6 +45,14 @@ JeepFSM = function() {
 	};
 
 	var handleEvent = function(sig, par) {
+
+		if ( sig === 'Draw' ) {
+			var gfx = par;
+			if ( !jeep )
+				jeep = jeepPolys();
+			gfx.drawPosRotPolys(jeep, -0.9, -0.9, deg);
+		}
+
 		switch(state) {
 
 			case 'STILL':
@@ -56,6 +66,10 @@ JeepFSM = function() {
 			break;
 
 			case 'ROTATING':
+			if ( sig === 'Tick' ) {
+				var dt = par;
+				deg += rotDir * dt * 250.0;
+			}
 			updateLeftRight(sig, par);
 			if ( (left + right) % 2 == 0) {
 				rotDir = 0;
@@ -73,6 +87,7 @@ JeepFSM = function() {
 	return {
 		handleEvent: handleEvent,
 		getState: function() { return state; },
-		getRotationSign: function() { return rotDir; }
+		getRotationSign: function() { return rotDir; },
+		name: "Jeep"
 	};
 };

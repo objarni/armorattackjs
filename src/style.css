@@ -24,3 +24,14 @@ h1 {
 	display: block;
 	margin: auto;
 }
+
+.statedump {
+	position: absolute;
+	border: solid 2px black;
+	left: 10px;
+	top: 100px;
+	height:300px;
+	width:200px;
+	background-color: white;
+	font-family: "Courier New", Courier, monospace;
+}

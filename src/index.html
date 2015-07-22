@@ -25,6 +25,7 @@
 			<div class="bottomspace">Vectrex version</div>
 		</span>
 	</div>
+	<div class="statedump" id='statedump'></div>
 
 	<div align="center" ng-app="aaApp" ng-controller="aaController">
 		<div>
@@ -55,9 +56,21 @@ Linecount:
 	$(function() {
 
 			// AAGame
-			var aagame = AAGame();
 			app = FSMApp();
+			var aagame = AAGame(app);
 			app.addMachine(aagame);
+
+			// State dump (for debugging)
+			dumpState = function() {
+				var machines = app.listMachines();
+				var txt = "#machines = " + machines.length + '<br>';
+				machines.forEach(function(machine) {
+					txt += machine.name + ': ' + machine.getState() + '<br>';
+				});
+				$('#statedump').html(txt);
+				setTimeout(dumpState, 1000);
+			}
+			dumpState();
 
 			// FPS counter
 			var stats = new Stats();

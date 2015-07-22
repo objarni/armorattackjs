@@ -29,6 +29,13 @@
      NoMoreWaves
      Tick
     */
+    QUnit.module( "AAGame - general" );
+
+    QUnit.test( "is named correctly", function( assert ) {
+      var aagame = AAGame();
+      assert.equal( aagame.name, "AAGame", "Should be named AAGame" );
+    });
+
     QUnit.module( "AAGame - TITLE state" );
 
     QUnit.test( "is start state", function( assert ) {
@@ -121,7 +128,7 @@
         add/remove machines in runtime
         0 or more machines
         handleEvent propages to all machines
-        public API to publish events, add/remove machines
+        public API to publish events, add/remove machines, list machines
     */
 
     QUnit.module( "FSAMApp" );
@@ -135,6 +142,15 @@
       app.addMachine(m2);
       app.handleEvent('testsignal', null);
       assert.equal( 2, calls, 'Should propagate event to every machine');
+    });
+
+    QUnit.test( "can list added machines", function( assert ) {
+      var m1 = { handleEvent: function(sig, par) {} };
+      var m2 = { handleEvent: function(sig, par) {} };
+      var app = FSMApp();
+      app.addMachine(m1);
+      app.addMachine(m2);
+      assert.equal( app.listMachines().length, 2, 'Should list all added machines' );
     });
     
     QUnit.test( "removed machine does not get events anymore", function( assert ) {
@@ -168,6 +184,11 @@
     QUnit.test( "starts in STILL", function( assert ) {
       var jeep = JeepFSM();
       assert.equal( jeep.getState(), 'STILL', "Should start in STILL state");
+    });
+
+    QUnit.test( "is named Jeep", function( assert ) {
+      var jeep = JeepFSM();
+      assert.equal( jeep.name, 'Jeep', "Should be named Jeep");
     });
 
     QUnit.test( "goes to FORWARD if gas down", function( assert ) {
