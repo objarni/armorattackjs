@@ -15,8 +15,8 @@
 				{ version: 0.06, log: "Removed random lines, added jeep polys"},
 				{ version: 0.07, log: "Added YouTube video to the side"},
 				{ version: 0.08, log: "Improved layout, changed colors, links"},
-				{ version: 0.09, log: "Jeep turnable"}
-				{ version: 0.10, log: "Added state dump for debugging purposes"},
+				{ version: 0.09, log: "Jeep turnable"},
+				{ version: "0.10", log: "Added state dump for debugging purposes"}
 				];
 				$scope.changelog = changelog;
 			}
