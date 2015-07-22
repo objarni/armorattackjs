@@ -64,8 +64,10 @@ Linecount:
 			dumpState = function() {
 				var machines = app.listMachines();
 				var txt = "#machines = " + machines.length + '<br>';
+				var cnt = 1;
 				machines.forEach(function(machine) {
-					txt += machine.name + ': ' + machine.getState() + '<br>';
+					txt += cnt + ". " + machine.name + ': ' + machine.getState() + '<br>';
+					cnt++;
 				});
 				$('#statedump').html(txt);
 				setTimeout(dumpState, 1000);
