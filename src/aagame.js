@@ -5,36 +5,35 @@
 // Enable/disable debug mode
 debug = true;
 
-var AAGame = function () {
+var AAGame = function (app) {
 	var state = "TITLE";
 	var lives = 0;
 	var jeep = null;
 	var deg = 0;
-	var left = false;
-	var right = false;
+	var timeAcc = 0;
 
 	var handleEvent = function(sig, par) {
-		if ( debug )
-			if ( sig !== 'Draw' && sig !== 'Tick' )
+		if ( debug ) {
+			if ( sig !== 'Draw' && sig !== 'Tick' ) {
 				console.log(sig, par);
-			switch(sig) {
+			}
+		}
 
+		switch(state) {
+
+			case 'TITLE':
+			switch(sig) {
 				case 'ControlDown':
 				state = 'INGAME';
-				lives = 3;
-				if ( par === 'left' )
-					left = true;
-				if ( par === 'right' )
-					right = true;
+				lives = 2;
+				if ( app )
+					app.addMachine({});
 				break;
-
-				case 'ControlUp':
-				if ( par === 'left' )
-					left = false;
-				if ( par === 'right' )
-					right = false;
-				break;
-
+			}
+			break;
+			
+			case 'INGAME':
+			switch(sig) {
 				case 'NoMoreWaves':
 				state = 'GAMEFINISHED';
 				break;
@@ -43,17 +42,11 @@ var AAGame = function () {
 				lives -= 1;
 				if ( lives == 0 )
 					state = 'GAMEOVER';
-				else
+				else {
 					state = 'DEAD';
-				break;
+					timeAcc = 0;
+				}
 
-				case 'Tick':
-				var dt = par;
-				var value = dt * 300;
-				if ( left && !right )
-					deg += value;
-				if ( right && !left )
-					deg -= value;
 				break;
 
 				case 'Draw':
@@ -64,16 +57,35 @@ var AAGame = function () {
 				gfx.drawPosRotPolys(jeep, -0.9, -0.9, deg);
 				break;
 			}
-		};
+			break;
+			
+			case 'DEAD':
+			if ( sig === 'Tick' ) {
+				var dt = par;
+				timeAcc += dt;
+				if ( timeAcc > 3 ) {
+					state = 'INGAME';
+				}
+			}
+			break;
+			
+			case 'GAMEFINISHED':
+			switch(sig) {
 
-		var getState = function() { return state; };
-		var getLives = function() { return lives; };
+			}
+			break;
+			
+		}
+	};
 
-		var api = {
-			handleEvent: handleEvent,
-			getState: getState,
-			getLives: getLives
-		};
+	var getState = function() { return state; };
+	var getLives = function() { return lives; };
 
-		return api;
-	}
+	var api = {
+		handleEvent: handleEvent,
+		getState: getState,
+		getLives: getLives
+	};
+
+	return api;
+}

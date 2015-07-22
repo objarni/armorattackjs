@@ -17,8 +17,8 @@
     /*
     AAGAme - the main game object of Armour Attack JS.
     States:
-     TITLE
-     INGAME
+     #TITLE
+     #INGAME
      DEAD
      GAMEOVER
      GAMEFINISHED
@@ -48,27 +48,29 @@
 
     QUnit.test( "game finished event detected", function( assert ) {
       var aagame = AAGame();
+      aagame.handleEvent('ControlDown', 'left');
       aagame.handleEvent('NoMoreWaves', null);
       var state = aagame.getState();
       assert.equal( state, "GAMEFINISHED", "Should go to GAMEFINISHED when no more waves are left" );
     });
     
-    QUnit.test( "player starts with 3 jeeps", function( assert ) {
+    QUnit.test( "player starts with 2 extra jeeps", function( assert ) {
       var aagame = AAGame();
       assert.equal( aagame.getLives(), 0 );
       aagame.handleEvent( 'ControlDown', 'right' );
-      assert.equal( aagame.getLives(), 3 );
+      assert.equal( aagame.getLives(), 2 );
     });
     
     QUnit.test( "lives decrease when player hit", function( assert ) {
       var aagame = AAGame();
       aagame.handleEvent( 'ControlDown', 'fire' );
       aagame.handleEvent( 'PlayerHit', null );
-      assert.equal( aagame.getLives(), 2 );
+      assert.equal( aagame.getLives(), 1 );
     });
     
     QUnit.test( "goes to DEAD state when hit and more than 0 lives left", function( assert ) {
       var aagame = AAGame();
+      aagame.handleEvent( 'ControlDown', 'left' );
       aagame.handleEvent( 'PlayerHit', null );
       assert.equal( aagame.getState(), 'DEAD' );
     });
@@ -77,11 +79,41 @@
       var aagame = AAGame();
       aagame.handleEvent( 'ControlDown', 'fire' );
       aagame.handleEvent( 'PlayerHit', null );
+      aagame.handleEvent( 'Tick', 3.5 ); // Get out of DEAD state
       aagame.handleEvent( 'PlayerHit', null );
+      aagame.handleEvent( 'Tick', 3.5 ); // Get out of DEAD state
       aagame.handleEvent( 'PlayerHit', null );
       assert.equal( aagame.getState(), 'GAMEOVER' );
     });
 
+    QUnit.test( "there is a jeep in INGAME state", function( assert ) {
+      var app = FSMApp()
+      var aagame = AAGame(app);
+      app.addMachine( aagame );
+      assert.equal( app.countMachines(), 1, "Only one machine in TITLE state" );
+      app.handleEvent( 'ControlDown', 'left' );
+      assert.equal( app.countMachines(), 2, "Should create jeep when entering INGAME" );
+    });
+    
+    QUnit.module( "AAGame - DEAD state" );
+
+    QUnit.test( "stays in dead for 2 seconds", function( assert ) {
+      var aagame = AAGame();
+      aagame.handleEvent('ControlDown', 'left');
+      aagame.handleEvent( 'PlayerHit', null );
+      aagame.handleEvent( 'Tick', 2 );
+      var state = aagame.getState();
+      assert.equal( state, "DEAD", "Should be in DEAD state after 2 seconds" );
+    });
+
+    QUnit.test( "leaves DEAD state after 3 seconds", function( assert ) {
+      var aagame = AAGame();
+      aagame.handleEvent('ControlDown', 'left');
+      aagame.handleEvent( 'PlayerHit', null );
+      aagame.handleEvent( 'Tick', 3.1 );
+      var state = aagame.getState();
+      assert.equal( state, "INGAME", "Should be in DEAD state for 3 seconds" );
+    });
 
     /*
       FSMApp - qp inspired FSM running object.

@@ -16,6 +16,9 @@ FSMApp = function() {
 				machines.splice(index, 1);
 			else
 				throw new Error('Tried to remove machine not added');
+		},
+		countMachines: function() {
+			return machines.length;
 		}
 	};
 };
