@@ -20,7 +20,9 @@ JeepFSM = function() {
 	var right = 0;
 	var left = 0;
 	var jeep = null;
-	var deg = 0;
+	var rad = 0;
+	var x = 0;
+	var y = 0;
 
 	var updateLeftRight = function(sig, par) {
 		if ( sig !== 'ControlDown' && sig !== 'ControlUp')
@@ -50,7 +52,7 @@ JeepFSM = function() {
 			var gfx = par;
 			if ( !jeep )
 				jeep = jeepPolys();
-			gfx.drawPosRotPolys(jeep, -0.9, -0.9, deg);
+			gfx.drawPosRotPolys(jeep, x, y, rad);
 		}
 
 		switch(state) {
@@ -68,7 +70,7 @@ JeepFSM = function() {
 			case 'ROTATING':
 			if ( sig === 'Tick' ) {
 				var dt = par;
-				deg += rotDir * dt * 250.0;
+				rad += rotDir * dt * 5;
 			}
 			updateLeftRight(sig, par);
 			if ( (left + right) % 2 == 0) {
@@ -80,6 +82,11 @@ JeepFSM = function() {
 			case 'FORWARD':
 			if ( sig === 'ControlUp' && par === 'gas')
 				state = 'STILL';
+			if ( sig === 'Tick' ) {
+				var dt = par;
+				x += dt * Math.cos(rad);
+				y += dt * Math.sin(rad);
+			}
 			break;
 		}
 
