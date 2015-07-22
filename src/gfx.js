@@ -29,7 +29,7 @@ Poly = function() {
 
 AAGfxDriver = function(ctx2d, size) {
 	// Transform from "2D graphics coordinate system" to "AA coordinates"
-	ctx2d.resetTransform();
+	ctx2d.setTransform(1, 0, 0, 1, 0, 0);
 	ctx2d.translate(size/2, size/2);
 	ctx2d.scale(size/2, -size/2);
 	ctx2d.lineWidth = 3.5/size;
