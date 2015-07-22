@@ -11,6 +11,7 @@
   <script src="http://code.jquery.com/qunit/qunit-1.18.0.js"></script>
   <script src="aagame.js"></script>
   <script src="fsmapp.js"></script>
+  <script src="jeep.js"></script>
   <script>
 
     /*
@@ -121,8 +122,71 @@
       var app = FSMApp();
       assert.throws(function() { app.removeMachine(m) }, 'Should throw if removing non-added machine');
     });
-    
-    setTimeout(function() { location.reload() }, 2000);
+
+    /* Jeep
+    States:
+      STILL
+      FORWARD
+      ROTATING
+      ROTATINGFORWARD
+    */
+
+    QUnit.module( "JeepFSM" );
+
+    QUnit.test( "starts in STILL", function( assert ) {
+      var jeep = JeepFSM();
+      assert.equal( jeep.getState(), 'STILL', "Should start in STILL state");
+    });
+
+    QUnit.test( "goes to FORWARD if gas down", function( assert ) {
+      var jeep = JeepFSM();
+      jeep.handleEvent('ControlDown', 'gas');
+      assert.equal( jeep.getState(), 'FORWARD', "Gas should put jeep in FORWARD state");
+    });
+
+    QUnit.test( "goes to STILL from FORWARD if gas is released", function( assert ) {
+      var jeep = JeepFSM();
+      jeep.handleEvent('ControlDown', 'gas');
+      jeep.handleEvent('ControlUp', 'gas');
+      assert.equal( jeep.getState(), 'STILL', "Releasing gas should put jeep to halt");
+    });
+
+    QUnit.test( "left down goes to ROTATING positive direction", function( assert ) {
+      var jeep = JeepFSM();
+      jeep.handleEvent('ControlDown', 'left');
+      assert.equal( jeep.getState(), 'ROTATING', "Pressing left should make jeep rotate");
+      assert.equal( jeep.getRotationSign(), 1, "Left rotation direction is positive");
+    });
+
+    QUnit.test( "left down then up goes to STILL", function( assert ) {
+      var jeep = JeepFSM();
+      jeep.handleEvent('ControlDown', 'left');
+      jeep.handleEvent('ControlUp', 'left');
+      assert.equal( jeep.getState(), 'STILL', "Pressing left should make jeep rotate");
+    });
+
+    QUnit.test( "right down goes to ROTATING", function( assert ) {
+      var jeep = JeepFSM();
+      jeep.handleEvent('ControlDown', 'right');
+      assert.equal( jeep.getState(), 'ROTATING', "Pressing right should make jeep rotate");
+      assert.equal( jeep.getRotationSign(), -1, "Right rotation direction is negative");
+    });
+
+    QUnit.test( "right down then up goes to STILL", function( assert ) {
+      var jeep = JeepFSM();
+      jeep.handleEvent('ControlDown', 'right');
+      jeep.handleEvent('ControlUp', 'right');
+      assert.equal( jeep.getState(), 'STILL', "Pressing right should make jeep rotate");
+    });
+
+    QUnit.test( "left and right down results in STILL state", function( assert ) {
+      var jeep = JeepFSM();
+      jeep.handleEvent('ControlDown', 'left');
+      jeep.handleEvent('ControlDown', 'right');
+      assert.equal( jeep.getState(), 'STILL', "Pressing left should make jeep rotate");
+    });
+
+    //setTimeout(function() { location.reload() }, 2000);
   </script>
   <a href="index.html">Back to Armor Attack</a>
 </body>

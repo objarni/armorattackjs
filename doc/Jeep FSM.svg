@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="Jeep FSM.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24748737"
-     inkscape:cx="-1254.9503"
-     inkscape:cy="319.02949"
+     inkscape:cx="-1535.638"
+     inkscape:cy="209.2915"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -167,35 +167,67 @@
        id="path3791"
        inkscape:connector-curvature="0" />
     <text
+       sodipodi:linespacing="125%"
+       id="text3909"
+       y="607.89502"
+       x="-2056.6707"
+       style="font-size:72px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         id="tspan3911"
+         y="607.89502"
+         x="-2056.6707"
+         sodipodi:role="line">Left+Right</tspan><tspan
+         id="tspan3913"
+         y="697.89502"
+         x="-2056.6707"
+         sodipodi:role="line">% 2 == 1</tspan></text>
+    <text
        xml:space="preserve"
        style="font-size:72px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-2024.3457"
-       y="640.21991"
+       x="-763.67529"
+       y="1181.6617"
        id="text3793"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan3795"
-         x="-2024.3457"
-         y="640.21991">Left/Right</tspan><tspan
+         x="-763.67529"
+         y="1181.6617"
+         id="tspan3797">Left+Right</tspan><tspan
          sodipodi:role="line"
-         x="-2024.3457"
-         y="730.21991"
-         id="tspan3797">down</tspan></text>
+         x="-763.67529"
+         y="1271.6617"
+         id="tspan3907">% 2 == 1</tspan></text>
+    <text
+       transform="matrix(0.68511371,-0.72843614,0.72843614,0.68511371,0,0)"
+       xml:space="preserve"
+       style="font-size:72px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-2131.1521"
+       y="-1461.3221"
+       id="text3899"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="-2131.1521"
+         y="-1461.3221"
+         id="tspan3901">Left+Right</tspan><tspan
+         id="tspan3903"
+         sodipodi:role="line"
+         x="-2131.1521"
+         y="-1371.3221"> % 2 == 0</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3799"
-       y="422.02698"
-       x="-2614.2749"
+       y="-253.94308"
+       x="-1722.2322"
        style="font-size:72px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       xml:space="preserve"><tspan
-         y="422.02698"
-         x="-2614.2749"
-         id="tspan3801"
-         sodipodi:role="line">Left/Right</tspan><tspan
+       xml:space="preserve"
+       transform="matrix(0.68511371,-0.72843614,0.72843614,0.68511371,0,0)"><tspan
          id="tspan3803"
-         y="512.02698"
-         x="-2614.2749"
-         sodipodi:role="line">up</tspan></text>
+         y="-253.94308"
+         x="-1722.2322"
+         sodipodi:role="line">Left+Right</tspan><tspan
+         y="-163.94308"
+         x="-1722.2322"
+         sodipodi:role="line"
+         id="tspan3897"> % 2 == 0</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path3805"
@@ -289,36 +321,6 @@
        id="path3855"
        d="m -585.88852,902.8596 c -88.89347,266.6803 -436.38588,359.6143 -436.38588,359.6143 l 28.28421,-60.6091 52.528,84.8528 -72.73101,-24.2437"
        style="fill:none;stroke:#0000ff;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text3857"
-       y="1230.149"
-       x="-747.51288"
-       style="font-size:72px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       xml:space="preserve"><tspan
-         y="1230.149"
-         x="-747.51288"
-         id="tspan3859"
-         sodipodi:role="line">Left/Right</tspan><tspan
-         id="tspan3861"
-         y="1320.149"
-         x="-747.51288"
-         sodipodi:role="line">down</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:72px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-1398.0511"
-       y="902.85968"
-       id="text3863"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3865"
-         x="-1398.0511"
-         y="902.85968">Left/Right</tspan><tspan
-         sodipodi:role="line"
-         x="-1398.0511"
-         y="992.85968"
-         id="tspan3867">up</tspan></text>
     <rect
        style="fill:none;stroke:#0000ff;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3869"
