@@ -9,6 +9,7 @@
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
   <script src="http://code.jquery.com/qunit/qunit-1.18.0.js"></script>
+  <script src="intersect.js"></script>
   <script src="aagame.js"></script>
   <script src="fsmapp.js"></script>
   <script src="jeep.js"></script>
@@ -237,6 +238,63 @@
       jeep.handleEvent('ControlDown', 'left');
       jeep.handleEvent('ControlDown', 'right');
       assert.equal( jeep.getState(), 'STILL', "Pressing left should make jeep rotate");
+    });
+
+    QUnit.module( "Line segment intersection routine" );
+
+    QUnit.test( "parallell segments do not intersect", function( assert ) {
+      var p1 = { x: 0, y: 0}; // ------
+      var p2 = { x: 10, y: 0};
+      var q1 = { x: 0, y: 5};
+      var q2 = { x: 10, y: 5};
+      var result = doLineSegmentsIntersect(p1, p2, q1, q2);
+      assert.equal( result, false, "parallell lines should not intersect")
+    });
+
+    QUnit.test( "non parallell segments that intersect", function( assert ) {
+      var p1 = { x: -5, y: 0}; // +
+      var p2 = { x: 5, y: 0};
+      var q1 = { x: 0, y: -5};
+      var q2 = { x: 0, y: 5};
+      var result = doLineSegmentsIntersect(p1, p2, q1, q2);
+      var expected = { x: 0, y: 0};
+      assert.ok( equalPoints(result,  expected) );
+    });
+
+    /*
+
+    Y
+    |                       (9, 10) = P2
+    |
+    |(0, 5)  = Q1
+    |
+    |
+    |    * (2, 3)
+    |
+    |(0, 1) = P1
+    |             (5, 0)   =  Q2
+    +--------------------------->  X
+
+    */
+
+    QUnit.test( "sloped intersecting line segments", function( assert ) {
+      var p1 = { x: 0, y: 1}; // +
+      var p2 = { x: 9, y: 10};
+      var q1 = { x: 0, y: 5};
+      var q2 = { x: 5, y: 0};
+      var result = doLineSegmentsIntersect(p1, p2, q1, q2);
+      var expected = { x: 2, y: 3};
+      assert.ok( equalPoints(result,  expected) );
+    });
+
+
+    QUnit.test( "non parallell segments that do not intersect", function( assert ) {
+      var p1 = { x: 0, y: 1}; // +
+      var p2 = { x: 9, y: 10};
+      var q1 = { x: 10, y: 5};
+      var q2 = { x: 15, y: 0};
+      var result = doLineSegmentsIntersect(p1, p2, q1, q2);
+      assert.notOk( result );
     });
 
     //setTimeout(function() { location.reload() }, 2000);
