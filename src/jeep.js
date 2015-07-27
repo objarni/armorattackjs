@@ -12,9 +12,10 @@ jeepPolys = function() {
 	bonnet.add(0.04,-0.010);
 
 	return [frame, bonnet];
-}
+};
 
-JeepFSM = function() {
+JeepFSM = function(wallCollisionService) {
+
 	var state = 'STILL';
 	var rotDir = 0;
 	var right = 0;
@@ -23,6 +24,8 @@ JeepFSM = function() {
 	var rad = 0;
 	var x = 0;
 	var y = 0;
+
+	var getPos = function() { return { x: x, y: y } };
 
 	var updateLeftRight = function(sig, par) {
 		if ( sig !== 'ControlDown' && sig !== 'ControlUp')
@@ -83,9 +86,16 @@ JeepFSM = function() {
 			if ( sig === 'ControlUp' && par === 'gas')
 				state = 'STILL';
 			if ( sig === 'Tick' ) {
+
 				var dt = par;
-				x += dt * Math.cos(rad);
-				y += dt * Math.sin(rad);
+				var pos = { x: x, y: y };
+				var targetPos = {
+					x: x + dt * Math.cos(rad),
+					y: y + dt * Math.sin(rad)
+				};
+				var newPos = wallCollisionService.tryMoveFromTo(pos, targetPos);
+				x = newPos.x;
+				y = newPos.y;
 			}
 			break;
 		}
@@ -95,6 +105,7 @@ JeepFSM = function() {
 		handleEvent: handleEvent,
 		getState: function() { return state; },
 		getRotationSign: function() { return rotDir; },
-		name: "Jeep"
+		name: "Jeep",
+		getPos: getPos
 	};
 };

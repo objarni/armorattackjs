@@ -240,6 +240,21 @@
       assert.equal( jeep.getState(), 'STILL', "Pressing left should make jeep rotate");
     });
 
+    QUnit.test( "uses wall collision service to move FORWARD", function( assert ) {
+      var returnPos = { x: 50, y: 50 };
+      var fakeWallCollisionService = {
+        tryMoveFromTo: function(P, Q) {
+          return returnPos;
+        }
+      };
+      var jeep = JeepFSM(fakeWallCollisionService);
+      jeep.handleEvent('ControlDown', 'gas');
+      jeep.handleEvent('Tick', 0.1);
+      var pos = jeep.getPos();
+      assert.ok( equalPoints(pos, returnPos), "Should use wall collision service");
+    });
+
+
     QUnit.module( "Line segment intersection routine" );
 
     QUnit.test( "parallell segments do not intersect", function( assert ) {

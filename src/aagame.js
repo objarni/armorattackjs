@@ -24,8 +24,18 @@ var AAGame = function (app) {
 				case 'ControlDown':
 				state = 'INGAME';
 				lives = 2;
-				if ( app )
-					app.addMachine(JeepFSM());
+				if ( app ) {
+					var wallCollisionService = {
+						tryMoveFromTo: function(from, to) {
+							var newPos = { x: to.x, y: to.y };
+							if ( newPos.x > 0 ) {
+								newPos.x = 0;
+							}
+							return newPos;
+						}
+					}
+					app.addMachine(JeepFSM(wallCollisionService));
+				}
 				break;
 			}
 			break;
@@ -48,6 +58,11 @@ var AAGame = function (app) {
 				break;
 
 				case 'Draw':
+				var gfx = par;
+				var terrain = Poly();
+				terrain.add(0, 1);
+				terrain.add(0, -1);
+				gfx.drawPoly(terrain);
 				break;
 			}
 			break;
